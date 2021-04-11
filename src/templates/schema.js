@@ -9,6 +9,12 @@ export const field = {
 
 export const table = {
     table: "",
-    columns: [ field ]
+    columns: [{
+        column: "",
+        config: {
+            migrations: "",
+            validations: "",
+            backpack: ""
+        }
+    }]
 }
-
