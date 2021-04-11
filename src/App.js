@@ -1,61 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Table from './components/Table';
-import { table as tableTemplate, field as fieldTemplate } from './templates/schema';
+import React, { useState } from 'react';
+// import { table as tableTemplate, field as fieldTemplate } from './templates/schema';
 import Code from './components/Editor';
 import 'prismjs/components/prism-json';
 import { SchemaContextProvider } from './contexts/schemaContext';
 import Form from './components/Form';
 const App = () => {
 
-
-
   const [code, setCode] = useState(`{
     "test":"test"
   }`);
-
-  const handleAddTable = () => {
-    let schemaCopy = [...schema];
-    schemaCopy.push({
-      table: "",
-      columns: [{
-        column: "",
-        config: {
-          migrations: "",
-          validations: "",
-          backpack: ""
-        }
-      }]
-    });
-    setSchema(schemaCopy)
-  }
-  const [schema, setSchema] = useState([{
-    table: "",
-    columns: [{
-      column: "",
-      config: {
-        migrations: "",
-        validations: "",
-        backpack: ""
-      }
-    }]
-  }]);
-
-  const handleAddColumn = (tableIndex) => {
-    let schemaCopy = [...schema];
-    schemaCopy[tableIndex].columns.push({
-      column: "",
-      config: {
-        migrations: "",
-        validations: "",
-        backpack: ""
-      }
-    });
-    setSchema(schemaCopy)
-  }
-
-  // useEffect(() => {
-
-  // }, []);
 
   return (
     <SchemaContextProvider>
@@ -67,7 +20,7 @@ const App = () => {
               <Form />
             </div>
             <div>
-              <Code code={code} language={'webmanifest'} />
+              <Code code={code} language={'json'} />
             </div>
           </div>
         </div>

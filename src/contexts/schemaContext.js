@@ -6,7 +6,7 @@ const reducer = (state, action) => {
   
     switch (action.type) {
         case 'add_table':
-            // let schemaCopy = [...state.schema];
+            console.log(schemaCopy)
             schemaCopy.push({
                 table: "",
                 columns: [{
@@ -30,6 +30,23 @@ const reducer = (state, action) => {
                 }
             });
             return {...state,schema: schemaCopy};
+
+            case "delete_table":
+                return;
+            case "delete_column":
+                return;
+
+            case 'update_table_name':
+                schemaCopy[action.payload.index].table = action.payload.value;
+                return {...state, schema: schemaCopy}
+
+            case 'update_column_name':
+                schemaCopy[action.payload.tableIndex].columns[action.payload.columnIndex].column = action.payload.value;
+                return {...state, schema: schemaCopy}
+
+            case 'update_config':
+                return {...state, schema: schemaCopy}
+
         default:
             return state;
     }
@@ -57,6 +74,8 @@ export const SchemaContextProvider = (props) => {
             schema: state.schema,
             addColumn: (index) => dispatch({ type: 'add_column', payload: index }),
             addTable: () => dispatch({ type: 'add_table' }),
+            updateTableName: (value, index) => dispatch({type: 'update_table_name', payload: {value, index}}),
+            updateColumnName: (value, tableIndex, columnIndex) => dispatch({type: 'update_column_name', payload: {value, tableIndex, columnIndex}})
         }}
     >
         {props.children}
