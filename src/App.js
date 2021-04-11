@@ -5,11 +5,6 @@ import 'prismjs/components/prism-json';
 import { SchemaContextProvider } from './contexts/schemaContext';
 import Form from './components/Form';
 const App = () => {
-
-  const [code, setCode] = useState(`{
-    "test":"test"
-  }`);
-
   return (
     <SchemaContextProvider>
       <div className="bg-gray-100 min-h-screen">
@@ -20,7 +15,7 @@ const App = () => {
               <Form />
             </div>
             <div>
-              <Code code={code} language={'json'} />
+              <Code  language={'json'} />
             </div>
           </div>
         </div>
