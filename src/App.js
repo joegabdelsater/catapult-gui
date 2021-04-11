@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import Table from './components/Table';
 import { table as tableTemplate, field as fieldTemplate } from './templates/schema';
-
+import Editor from 'react-simple-code-editor';
+import Prism from 'prismjs';
+import Code from './components/Editor';
+import 'prismjs/components/prism-json';
 const App = () => {
   const [schema, setSchema] = useState([tableTemplate]);
+  const [code, setCode] = useState(`{
+    "test":"test"
+  }`);
 
   const handleAddTable = () => {
     let schemaCopy = [...schema];
@@ -38,7 +44,21 @@ const App = () => {
               </form>
             </div>
           </div>
-          <div>Hey2</div>
+          <div>
+            <Code code={code} language={'webmanifest'} />
+            {/* <Editor
+              value={code}
+              onValueChange={(code) => setCode(code)}
+              highlight={(code) => Prism.highlight(code, Prism.languages.js)}
+              padding={10}
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 12,
+                color:'white',
+                backgroundColor: '#111'
+              }}
+            /> */}
+          </div>
         </div>
       </div>
     </div>
