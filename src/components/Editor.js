@@ -15,27 +15,31 @@ export default function Code({ language }) {
   const parseSchema = () => {
     // setCode(`${JSON.stringify(schema)}`)
     let codeString = `{\n`;
-    schema.map((table) => {
-      let tableString = `\t"${table.table}" : {\n`;
 
-      let columnString = ``;
+    let columnString = ``;
+    let tableString = ``;
+    schema.map((table) => {
+  tableString = `\t"${table.table}" : {\n`;
+  
       table.columns.map((column) => {
-        columnString += `\t\t"${column.column}" : {\n`
+        let columnStringArray = [];
+        columnStringArray.push(`\t\t"${column.column}" : {\n`);
+        // columnString += `\t\t"${column.column}" : {\n`
+        let configStringArray = [];
 
         Object.keys(column.config).map((config) => {
-          let configStringArray = [];
           if (column.config[config] !== "") {
             configStringArray.push(`\t\t\t\t "${config}" : "${column.config[config]}"`);
           }
-          console.log(configStringArray)
-          let configString = configStringArray.join(',')
-          configString += '\n'
-          columnString += configString
         })
+        let configString = configStringArray.join(',\n')
+        configString += '\n'
+        columnString = columnStringArray.join(",")
+        columnString += configString
         columnString += `\t\t\t\t}\n`
       })
       tableString += columnString;
-      tableString += `\n\t}`;
+      tableString += `\n\t\t\t}`;
       codeString += tableString;
     })
     codeString += `\n}`
