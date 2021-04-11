@@ -4,7 +4,7 @@ import { SchemaContext } from '../contexts/schemaContext';
 
 const Field = (props) => {
     const { tableIndex, fieldIndex } = props;
-    const { schema, updateColumnName, updateColumnConfig } = useContext(SchemaContext);
+    const { schema, updateColumnName, updateColumnConfig, deleteColumn } = useContext(SchemaContext);
 
     const handleChange = (event) => {
         updateColumnName(event.target.value, tableIndex, fieldIndex)
@@ -14,11 +14,15 @@ const Field = (props) => {
         updateColumnConfig(config, event.target.value, tableIndex, fieldIndex)
     }
 
+    const handleColumnDelete = () => {
+        deleteColumn(tableIndex, fieldIndex);
+    }
+
     return (
         <div className="ml-8 mt-5 flex flex-row justify-between">
             <div>
                 <div className="flex flex-row justify-between items-center">
-                    <FaTrashAlt className="text-red-600 cursor-pointer" />
+                    <FaTrashAlt className="text-red-600 cursor-pointer" onClick={handleColumnDelete}/>
                     <input
                         value={schema[tableIndex].columns[fieldIndex].column}
                         onChange={handleChange}

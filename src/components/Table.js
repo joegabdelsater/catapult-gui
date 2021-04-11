@@ -5,16 +5,20 @@ import { SchemaContext } from '../contexts/schemaContext';
 
 const Table = (props) => {
     const { table, index } = props;
-    const { addTable, addColumn, schema, updateTableName } = useContext(SchemaContext);
+    const { addTable, addColumn, schema, updateTableName, deleteTable } = useContext(SchemaContext);
 
     const handleChange = (event) => {
         updateTableName(event.target.value, index)
     }
+
+    const handleDeleteTable = () => {
+        deleteTable(index)
+    }
     return (
         <div className="mb-10 ">
             <div className="flex flex-row border-b-2 mb-3 bg-purple-600 justify-between py-2 px-2 items-center">
-                <div className="flex flex-row justify-between  px-2 items-center cursor-pointer">
-                    <FaTrashAlt className="text-red-600" />
+                <div className="flex flex-row justify-between  px-2 items-center cursor-pointer" onClick={handleDeleteTable}>
+                    <FaTrashAlt className="text-red-600"  />
                     <p className=" font-p pl-3 text-red-600">
                         Delete table
                     </p>
