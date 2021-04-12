@@ -12,6 +12,21 @@ export default function Code({ language }) {
     Prism.highlightAll();
   })
 
+  // const download = (event) => {
+  //   event.preventDefault();
+  //   // Prepare the file
+  //   // Download it
+  //   const blob = new Blob([code]);
+  //   const fileDownloadUrl = URL.createObjectURL(blob);
+  //   this.setState({ fileDownloadUrl: fileDownloadUrl },
+  //     () => {
+  //       this.dofileDownload.click();
+  //       URL.revokeObjectURL(fileDownloadUrl);  // free up storage--no longer needed.
+  //       this.setState({ fileDownloadUrl: "" })
+  //     })
+  // }
+
+
   const parseSchema = () => {
     let tablesArray = [];
     let schemaString = ``
@@ -48,12 +63,18 @@ export default function Code({ language }) {
       tablesArray.push(finalTable)
     });
     schemaString = `{\n\t` + tablesArray.join(",\n\t") + `\n}`
+
     setCode(schemaString);
-    console.log(code)
   }
 
   return (
     <div className="Code">
+
+      <button onClick={() => { navigator.clipboard.writeText(code) }}>
+        Copy to Clipboard
+          </button>
+
+
       <pre>
         <code className={`language-${language}`}>{code}</code>
       </pre >

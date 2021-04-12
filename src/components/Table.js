@@ -53,8 +53,7 @@ const Table = (props) => {
                 column={column}
                 tableIndex={index}
                 fieldIndex={idx}
-                key={index.toString()} />)}
-
+                key={index.toString() + idx.toString()} />)}
         </div>
     )
 }
