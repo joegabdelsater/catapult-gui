@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
 import { SchemaContext } from '../contexts/schemaContext';
+import { FaRegCopy } from 'react-icons/fa';
+
 
 
 export default function Code({ language }) {
@@ -69,11 +71,13 @@ export default function Code({ language }) {
 
   return (
     <div className="Code">
-
-      <button onClick={() => { navigator.clipboard.writeText(code) }}>
-        Copy to Clipboard
-          </button>
-
+      <div className="flex justify-end mt-16">
+        <button onClick={() => { navigator.clipboard.writeText(code) }}
+        className="flex items-center bg-gray-700 justify-center py-2 px-2 rounded text-yellow-200">
+          Copy to Clipboard
+        <FaRegCopy style={{ marginLeft: 10 }} />
+        </button>
+      </div>
 
       <pre>
         <code className={`language-${language}`}>{code}</code>
