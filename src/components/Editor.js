@@ -13,47 +13,50 @@ export default function Code({ language }) {
   })
 
   const parseSchema = () => {
-    // setCode(`${JSON.stringify(schema)}`)
-    let codeString = `{\n`;
-
-    let columnString = ``;
-    let tableString = ``;
+    let tablesArray = [];
+    let schemaString = ``
+    //Loop over all the tables
     schema.map((table) => {
-  tableString = `\t"${table.table}" : {\n`;
-  
+      const currentTable = table.table;
+      let finalTable = ``;
+      let columnArray = [];
+      //Loop over the table columns
       table.columns.map((column) => {
-        let columnStringArray = [];
-        columnStringArray.push(`\t\t"${column.column}" : {\n`);
-        // columnString += `\t\t"${column.column}" : {\n`
-        let configStringArray = [];
-
-        Object.keys(column.config).map((config) => {
-          if (column.config[config] !== "") {
-            configStringArray.push(`\t\t\t\t "${config}" : "${column.config[config]}"`);
+        const currentColumn = column.column
+        let finalColumn = ``;
+        const configurations = Object.keys(column.config);
+        let configurationsArray = [];
+        let finalConfiguration = ``;
+        //Loop over the column's configuration
+        configurations.map((configuration) => {
+          const currentConfiguration = column.config[configuration];
+          if (currentConfiguration !== "") {
+            configurationsArray.push(`"${configuration}" : "${currentConfiguration}"`);
           }
         })
-        let configString = configStringArray.join(',\n')
-        configString += '\n'
-        columnString = columnStringArray.join(",")
-        columnString += configString
-        columnString += `\t\t\t\t}\n`
-      })
-      tableString += columnString;
-      tableString += `\n\t\t\t}`;
-      codeString += tableString;
-    })
-    codeString += `\n}`
-    setCode(codeString)
-  };
 
-  // useEffect(() => {
-  //   Prism.highlightAll();
-  // }, []);
+        //finish parsing the configurations
+        finalConfiguration = `\t\t` + configurationsArray.join(`,\n\t\t\t`);
+        finalConfiguration = `{\n\t` + finalConfiguration + `\n\t\t}`;
+
+        //finish parsing the column ad push it to the final column array
+        finalColumn += `\t"${currentColumn}" : ${finalConfiguration}`
+        columnArray.push(finalColumn)
+      })
+
+      finalTable += `"${currentTable}" : ` + `{\n\t` + columnArray.join(`,\n`) + '\n\t}'
+      tablesArray.push(finalTable)
+    });
+    schemaString = `{\n\t` + tablesArray.join(",\n\t") + `\n}`
+    setCode(schemaString);
+    console.log(code)
+  }
+
   return (
     <div className="Code">
       <pre>
         <code className={`language-${language}`}>{code}</code>
-      </pre>
+      </pre >
     </div>
   );
 }

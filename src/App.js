@@ -15,7 +15,7 @@ const App = () => {
               <Form />
             </div>
             <div>
-              <Code  language={'json'} />
+              <Code  language={'webmanifest'} />
             </div>
           </div>
         </div>
