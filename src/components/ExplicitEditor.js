@@ -6,8 +6,8 @@ import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 
-const ExplicitEditor = () => {
-
+const ExplicitEditor = (props) => {
+    const {onClose, onSave} = props
     const [code, setCode] = useState(``)
 
     return (
@@ -15,11 +15,11 @@ const ExplicitEditor = () => {
             <div className="flex flex-row justify-between items-center py-5">
                 <h1 className="font-title text-lg">Column: Price</h1>
                 <div>
-                    <button className="bg-gray-700 py-2 px-3 text-yellow-300 rounded mr-5">
+                    <button className="bg-gray-700 py-2 px-3 text-yellow-300 rounded mr-5" onClick={onClose}>
                         Close
                     </button>
 
-                    <button className="bg-purple-400 py-2 px-3 text-white rounded">
+                    <button className="bg-purple-400 py-2 px-3 text-white rounded" onClick={(e) => onSave(e, 'backpack', code)}>
                         Done
                     </button>
                 </div>

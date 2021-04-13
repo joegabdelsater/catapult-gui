@@ -48,7 +48,10 @@ export default function Code({ language }) {
         //Loop over the column's configuration
         configurations.map((configuration) => {
           const currentConfiguration = column.config[configuration];
-          if (currentConfiguration !== "") {
+
+          if(currentConfiguration.includes("{")){
+            configurationsArray.push(`"${configuration}" : ${currentConfiguration}`);
+          }else if (currentConfiguration !== "" && !currentConfiguration.includes("{")) {
             configurationsArray.push(`"${configuration}" : "${currentConfiguration}"`);
           }
         })

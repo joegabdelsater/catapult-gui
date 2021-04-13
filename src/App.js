@@ -3,7 +3,6 @@ import Code from './components/Editor';
 import 'prismjs/components/prism-json';
 import { SchemaContextProvider } from './contexts/schemaContext';
 import Form from './components/Form';
-import ExplicitEditor from './components/ExplicitEditor';
 
 const App = () => {
   return (
@@ -19,7 +18,6 @@ const App = () => {
               <Code language={'webmanifest'} />
             </div>
           </div>
-          <ExplicitEditor />
         </div>
       </div>
     </SchemaContextProvider>
