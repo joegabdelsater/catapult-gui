@@ -9,6 +9,7 @@ import { FaRegCopy } from 'react-icons/fa';
 export default function Code({ language }) {
   const { schema } = useContext(SchemaContext);
   const [code, setCode] = useState(``)
+
   useEffect(() => {
     parseSchema()
     Prism.highlightAll();
@@ -70,17 +71,17 @@ export default function Code({ language }) {
   }
 
   return (
-    <div className="Code">
-      <div className="flex justify-end mt-16">
+    <div className="Code  bg-gray-100">
+      <div className="flex justify-end mt-16 bg-gray-100">
         <button onClick={() => { navigator.clipboard.writeText(code) }}
-        className="flex items-center bg-gray-700 justify-center py-2 px-2 rounded text-yellow-200">
+          className="flex items-center bg-gray-700 justify-center py-2 px-2 rounded text-yellow-200">
           Copy to Clipboard
         <FaRegCopy style={{ marginLeft: 10 }} />
         </button>
       </div>
 
       <pre>
-        <code className={`language-${language}`}>{code}</code>
+        <code className={`language-${language}` }>{code}</code>
       </pre >
     </div>
   );
