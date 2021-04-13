@@ -8,15 +8,7 @@ import "prismjs/components/prism-javascript";
 
 const ExplicitEditor = (props) => {
     const { onClose, onSave, columnName } = props
-    const [code, setCode] = useState(`{
-                    "list" : {
-
-                        },
-                    "create": {
-
-                        }
-                }
-`)
+    const [code, setCode] = useState(`{\n\t\t\t\t "list" : {\n\t\t\n\t\t\t\t},\n\t\t\t\t"create": {\n\t\t\n\t\t\t\t}\n\t\t\t}`)
 
     return (
         <div className="w-6/12 pb-10 px-10 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 border-purple-500 border-8 rounded shadow-2xl">
