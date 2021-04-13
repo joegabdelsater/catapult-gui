@@ -7,8 +7,16 @@ import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 
 const ExplicitEditor = (props) => {
-    const {onClose, onSave} = props
-    const [code, setCode] = useState(``)
+    const { onClose, onSave, value } = props
+    const [code, setCode] = useState(`{
+                    "list" : {
+
+                        },
+                    "create": {
+
+                        }
+                }
+`)
 
     return (
         <div className="w-6/12 pb-10 px-10 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 border-purple-400 border-8 rounded shadow-2xl">
@@ -19,7 +27,8 @@ const ExplicitEditor = (props) => {
                         Close
                     </button>
 
-                    <button className="bg-purple-400 py-2 px-3 text-white rounded" onClick={(e) => onSave(e, 'backpack', code)}>
+                    <button className="bg-purple-400 py-2 px-3 text-white rounded" onClick={(e) => onSave(e, 'backpack', code)
+                    }>
                         Done
                     </button>
                 </div>
@@ -27,12 +36,17 @@ const ExplicitEditor = (props) => {
             </div>
             <Editor
                 value={code}
-                onValueChange={(code) => setCode(code)}
+                onValueChange={(code) => {
+                    code.replace(" ", `\t\t\t\t\t\t\t\t\t\t\t`);
+                    setCode(code)
+                }
+                }
                 highlight={(code) => highlight(code, languages.js)}
                 padding={10}
                 style={{
+                    overflowY: "scroll",
                     fontFamily: '"Fira code", "Fira Mono", monospace',
-                    fontSize: 12,
+                    fontSize: 16,
                     backgroundColor: '#2d2d2d',
                     color: 'white',
                     height: 400,

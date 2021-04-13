@@ -84,7 +84,11 @@ const Field = (props) => {
                     <FaCode className="text-white"/>
                     </button>
 
-                  {  showEditor && <ExplicitEditor onClose={handleHideEditor} onSave={handleSaveEditor}/>}
+                  {  showEditor && <ExplicitEditor 
+                  onClose={handleHideEditor}
+                   onSave={handleSaveEditor}
+                   value={schema[tableIndex].columns[fieldIndex].column.backpack}
+                   />}
                 </div>
             </div>
         </div>

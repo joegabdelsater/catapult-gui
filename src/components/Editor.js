@@ -49,8 +49,9 @@ export default function Code({ language }) {
         configurations.map((configuration) => {
           const currentConfiguration = column.config[configuration];
 
+          //check if addded from editor or from input
           if(currentConfiguration.includes("{")){
-            configurationsArray.push(`"${configuration}" : ${currentConfiguration}`);
+            configurationsArray.push(`"${configuration}" : ${  currentConfiguration}`);
           }else if (currentConfiguration !== "" && !currentConfiguration.includes("{")) {
             configurationsArray.push(`"${configuration}" : "${currentConfiguration}"`);
           }
