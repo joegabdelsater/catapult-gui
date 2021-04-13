@@ -2,6 +2,7 @@
   "name": "catapultgui",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://catapult.yllw.tech",
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@tailwindcss/forms": "^0.3.2",
