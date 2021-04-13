@@ -38,7 +38,7 @@ const Field = (props) => {
     
 
     return (
-        <div className="ml-8 mt-5 flex flex-row justify-between">
+        <div className=" mt-5 flex flex-row justify-between">
             <div>
                 <div className="flex flex-row justify-between items-center">
                     <FaTrashAlt className="text-red-600 cursor-pointer" onClick={handleColumnDelete} />
@@ -85,6 +85,7 @@ const Field = (props) => {
                     </button>
 
                   {  showEditor && <ExplicitEditor 
+                  columnName={schema[tableIndex].columns[fieldIndex].column}
                   onClose={handleHideEditor}
                    onSave={handleSaveEditor}
                    value={schema[tableIndex].columns[fieldIndex].column.backpack}
