@@ -6,7 +6,6 @@ const reducer = (state, action) => {
 
     switch (action.type) {
         case 'add_table':
-            console.log(schemaCopy)
             schemaCopy.push({
                 table: "",
                 columns: [{
@@ -47,10 +46,12 @@ const reducer = (state, action) => {
 
         case 'delete_column':
             schemaCopy[action.payload.tableIndex].columns.splice(action.payload.fieldIndex, 1);
+            console.log('deleted_column', schemaCopy)
             return { ...state, schema: schemaCopy }
 
         case 'delete_table':
             schemaCopy.splice(action.payload.tableIndex, 1);
+            console.log('deleted_column', schemaCopy)
             return { ...state, schema: schemaCopy }
 
         default:

@@ -8,16 +8,23 @@ const Field = (props) => {
     const { schema, updateColumnName, updateColumnConfig, deleteColumn } = useContext(SchemaContext);
     const [showEditor, setShowEditor] = useState(false);
 
+    useEffect(() => {});
+
     const handleChange = (event) => {
+        console.log('config changed')
+
         updateColumnName(event.target.value, tableIndex, fieldIndex)
     }
 
     const handleConfig = (config, event) => {
+        console.log('column config changed')
         updateColumnConfig(config, event.target.value, tableIndex, fieldIndex)
     }
 
     const handleColumnDelete = () => {
-        deleteColumn(tableIndex, fieldIndex);
+        if(window.confirm('Delete Column: ' + schema[tableIndex].columns[fieldIndex].column)){
+            deleteColumn(tableIndex, fieldIndex);
+        }
     }
 
     const handleShowEditor = (e) => {
@@ -54,7 +61,7 @@ const Field = (props) => {
                 <div>
                     <label className="text-purple-500 mr-3">Migration:</label>
                     <input
-                        value={schema[tableIndex].columns[fieldIndex].column.migrations}
+                        value={schema[tableIndex].columns[fieldIndex].config.migrations}
                         onChange={(event) => handleConfig('migrations', event)}
                         type="text"
                         placeholder="Column type"
@@ -63,7 +70,7 @@ const Field = (props) => {
                 <div>
                     <label className="text-purple-500 mr-3">Validation:</label>
                     <input
-                        value={schema[tableIndex].columns[fieldIndex].column.validations}
+                        value={schema[tableIndex].columns[fieldIndex].config.validations}
                         onChange={(event) => handleConfig('validations', event)}
                         type="text"
                         placeholder="Field validation"
@@ -74,7 +81,7 @@ const Field = (props) => {
                    
                     </label>
                     <input
-                        value={schema[tableIndex].columns[fieldIndex].column.backpack}
+                        value={schema[tableIndex].columns[fieldIndex].config.backpack}
                         onChange={(event) => handleConfig('backpack', event)}
                         type="text"
                         placeholder="Field in backpack"
@@ -88,7 +95,7 @@ const Field = (props) => {
                   columnName={schema[tableIndex].columns[fieldIndex].column}
                   onClose={handleHideEditor}
                    onSave={handleSaveEditor}
-                   value={schema[tableIndex].columns[fieldIndex].column.backpack}
+                   value={schema[tableIndex].columns[fieldIndex].config.backpack}
                    />}
                 </div>
             </div>
